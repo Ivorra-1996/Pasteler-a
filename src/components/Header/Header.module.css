@@ -1,0 +1,41 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: transparent;
+    width: 100%;
+    padding: 0 16px;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 12px 12px;
+    gap: 24px;
+    row-gap: 10px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 18px;
+    color: var(--color-text-strong);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .content {
+        font-size: 16px;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        justify-content: center;
+        font-size: 14px;
+        gap: 12px;
+    }
+}

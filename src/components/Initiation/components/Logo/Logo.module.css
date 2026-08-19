@@ -1,0 +1,44 @@
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.circle {
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.brandName {
+    font-family: var(--font-heading) !important;
+    font-style: italic;
+    font-weight: 600 !important;
+    font-size: 26px !important;
+    color: var(--color-text-strong) !important;
+    line-height: 1.25;
+    margin: 10px 10px;
+    text-align: center;
+}
+
+.horizontalLine {
+    width: 50%;
+    height: 2px;
+    background-color: var(--color-accent);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

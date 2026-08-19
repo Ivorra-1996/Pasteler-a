@@ -1,0 +1,20 @@
+.footer {
+    padding: 20px ;
+}
+
+.content{
+    background-color: var(--color-text-strong);
+    height: 80px;
+    width: 100%;
+}
+.container p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--color-bg);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 10px;
+}
