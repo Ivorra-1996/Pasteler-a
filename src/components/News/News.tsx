@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './News.module.css';
 import { QuantityButton } from '../QuantityButton';
 import { Reveal } from '../Reveal';
@@ -35,11 +35,16 @@ type NewsProps = {
   addToCart: (producto: Product, cantidad: number) => void;
 };
 
+const AUTOPLAY_MS = 4000;
+
 const News = ({ addToCart }: NewsProps) => {
   const [expandido, setExpandido] = useState<number>(101);
   const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
+  const [isPaused, setIsPaused] = useState(false);
+  const indexRef = useRef(0);
 
   const handleExpand = (id: number) => {
+    indexRef.current = productos.findIndex((p) => p.id === id);
     setExpandido(id);
   };
 
@@ -47,12 +52,30 @@ const News = ({ addToCart }: NewsProps) => {
     setSelectedQuantity(quantity);
   };
 
+  // Carrusel automático: avanza de imagen en imagen, pero se detiene
+  // apenas el mouse pasa por encima (o si el usuario prefiere menos animaciones).
+  useEffect(() => {
+    if (isPaused) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const interval = setInterval(() => {
+      indexRef.current = (indexRef.current + 1) % productos.length;
+      setExpandido(productos[indexRef.current].id);
+    }, AUTOPLAY_MS);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
   return (
     <div className={styles.section}>
       <Reveal>
         <SectionHeading kicker="Novedades" title="Recién salidas del horno" />
       </Reveal>
-      <div className={styles.novedades}>
+      <div
+        className={styles.novedades}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         {productos.map((producto, index) => (
           <Reveal
             key={producto.id}

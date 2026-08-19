@@ -1,10 +1,9 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next-nprogress-bar';
 import { ArrowLeft, Minus, Plus, Trash2 } from 'lucide-react';
 import style from './Cart.module.css';
-import type { CartItem } from '@/types/cart';
-import { getCartData, setCartData } from '@/utils/cartUtils';
+import { useCart } from '@/context/CartContext';
 
 const BackToCatalog = ({ onClick }: { onClick: () => void }) => (
   <button type="button" className={style.backLink} onClick={onClick}>
@@ -14,43 +13,12 @@ const BackToCatalog = ({ onClick }: { onClick: () => void }) => (
 );
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const { cart, updateQuantity, removeItem, clearCart } = useCart();
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [confirmedTotal, setConfirmedTotal] = useState(0);
-  const isFirstSave = useRef(true);
   const { push } = useRouter();
 
-   // Recuperamos los datos del carrito al montar el componente
-  useEffect(() => {
-    setCartItems(getCartData());
-  }, []); // Solo se ejecuta al montar el componente
-
-  // Guardamos los datos en localStorage cuando cambian los items del carrito
-  // (se ignora la primera pasada, antes de que se hayan cargado los datos guardados,
-  // para no pisarlos con el estado inicial vacío)
-  useEffect(() => {
-    if (isFirstSave.current) {
-      isFirstSave.current = false;
-      return;
-    }
-    setCartData(cartItems);
-  }, [cartItems]); // Se ejecuta cada vez que cartItems cambia
-
-  const handleQuantityChange = (id: number, delta: number) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(item.quantity + delta, 1) }
-          : item
-      )
-    );
-  };
-
-  const handleRemoveItem = (id: number) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
-
-  const totalPrice = cartItems.reduce(
+  const totalPrice = cart.reduce(
     (total, item) => total + parseFloat(item.price) * item.quantity,
     0
   );
@@ -58,7 +26,7 @@ const Cart = () => {
   const handleCheckout = () => {
     setConfirmedTotal(totalPrice);
     setOrderPlaced(true);
-    setCartItems([]);
+    clearCart();
   };
 
   if (orderPlaced) {
@@ -85,24 +53,24 @@ const Cart = () => {
       {/* Left Column: Product List */}
       <div className={style.cartProducts}>
         <h2>Carrito de Compras</h2>
-        {cartItems.map((item) => (
+        {cart.map((item) => (
           <div key={item.id} className={style.cartItem}>
             <img src={item.image} alt={item.name} className={style.cartItemImage} />
             <div className={style.cartItemDetails}>
               <h4>{item.name}</h4>
               <p>Precio: ${item.price}</p>
               <div className={style.cartItemQuantity}>
-                <button type="button" onClick={() => handleQuantityChange(item.id, -1)} aria-label="Disminuir cantidad">
+                <button type="button" onClick={() => updateQuantity(item.id, -1)} aria-label="Disminuir cantidad">
                   <Minus size={14} strokeWidth={2.5} />
                 </button>
                 <span>{item.quantity}</span>
-                <button type="button" onClick={() => handleQuantityChange(item.id, 1)} aria-label="Aumentar cantidad">
+                <button type="button" onClick={() => updateQuantity(item.id, 1)} aria-label="Aumentar cantidad">
                   <Plus size={14} strokeWidth={2.5} />
                 </button>
               </div>
               <p>Total: ${parseFloat(item.price) * item.quantity}</p>
             </div>
-            <button type="button" onClick={() => handleRemoveItem(item.id)} className={style.cartItemRemove}>
+            <button type="button" onClick={() => removeItem(item.id)} className={style.cartItemRemove}>
               <Trash2 size={14} strokeWidth={2} />
               Eliminar
             </button>
@@ -124,7 +92,7 @@ const Cart = () => {
         <button
           className={style.cartCheckout}
           onClick={handleCheckout}
-          disabled={cartItems.length === 0}
+          disabled={cart.length === 0}
         >
           Finalizar Compra
         </button>

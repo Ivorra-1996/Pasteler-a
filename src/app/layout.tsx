@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Lora, Mulish } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/context/CartContext";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 // Configuración de Geist Sans y Mono
 const geistSans = Geist({
@@ -41,7 +44,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${lora.variable} ${mulish.variable}`}
       >
-        {children}
+        <CartProvider>
+          <Header />
+          {children}
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

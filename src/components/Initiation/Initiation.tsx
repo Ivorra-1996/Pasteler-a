@@ -1,8 +1,5 @@
 'use client';
-import { useState } from 'react';
-import { Header } from '../Header';
 import { Catalog } from '../Catalog';
-import { Footer } from '../Footer';
 import { News } from '../News';
 import { About } from '../About';
 import { Process } from '../Process';
@@ -11,39 +8,13 @@ import { PaymentMethods } from '../PaymentMethods';
 import { Reveal } from '../Reveal';
 import { Logo } from './components/Logo';
 import styles from './Initiation.module.css';
-import type { CartItem, Product } from '@/types/cart';
+import { useCart } from '@/context/CartContext';
 
 const Initiation = () => {
-  const [cart, setCart] = useState<CartItem[]>([]); // Estado del carrito
-
-  const addToCart = (producto: Product, quantity: number) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === producto.id);
-
-      if (existingItem) {
-        return prevCart.map((item) =>
-          item.id === producto.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
-      } else {
-        return [
-          ...prevCart,
-          {
-            id: producto.id,
-            name: producto.name,
-            price: producto.price,
-            quantity: quantity,
-            image: producto.image,
-          },
-        ];
-      }
-    });
-  };
+  const { addToCart } = useCart();
 
   return (
     <div>
-      <Header cart={cart} /> {/* Pasa el carrito al Header */}
       <Reveal>
         <Logo />
         <p className={styles.contentText}>
@@ -56,7 +27,6 @@ const Initiation = () => {
       <Process />
       <Testimonials />
       <PaymentMethods />
-      <Footer />
     </div>
   );
 };

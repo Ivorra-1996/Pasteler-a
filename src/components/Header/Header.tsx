@@ -1,15 +1,11 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import styles from './Header.module.css';
 import { Divider } from '../Divider';
 import { AddToCart } from '../AddToCart';
-import type { CartItem } from '@/types/cart';
 
-type HeaderProps = {
-  cart: CartItem[]; // Recibe el carrito como prop
-};
-
-const Header: React.FC<HeaderProps> = ({ cart }) => {
+const Header = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -22,11 +18,11 @@ const Header: React.FC<HeaderProps> = ({ cart }) => {
   return (
     <div className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.content}>
-        <a href="#">Inicio</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#contacto">Contacto</a>
-        <a href="#catalogo">Pedidos</a>
-        <AddToCart cart={cart} /> {/* Pasa el carrito a AddToCart */}
+        <Link href="/">Inicio</Link>
+        <Link href="/#nosotros">Nosotros</Link>
+        <Link href="/#contacto">Contacto</Link>
+        <Link href="/#catalogo">Pedidos</Link>
+        <AddToCart />
       </div>
       <Divider />
     </div>
