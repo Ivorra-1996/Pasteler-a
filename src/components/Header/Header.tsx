@@ -15,6 +15,19 @@ const Header = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // El header es sticky, así que si el navegador restaura una posición de
+  // scroll vieja al recargar (F5), el header puede quedar tapando contenido.
+  // Evitamos eso arrancando siempre arriba del todo, salvo que la URL apunte
+  // a una sección puntual (#nosotros, #catalogo, #contacto).
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   return (
     <div className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.content}>

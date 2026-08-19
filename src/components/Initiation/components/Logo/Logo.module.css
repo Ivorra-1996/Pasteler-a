@@ -1,44 +1,47 @@
 .logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
 }
 
-.circle {
-    width: 200px;
-    height: 200px;
-    background-color: transparent;
-    border-radius: var(--radius-btn);
-    border: 2px solid var(--color-accent);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+.stage {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.shape {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  border: 2px solid var(--color-accent);
 }
 
 .brandName {
-    font-family: var(--font-heading) !important;
-    font-style: italic;
-    font-weight: 600 !important;
-    font-size: 26px !important;
-    color: var(--color-text-strong) !important;
-    line-height: 1.25;
-    margin: 10px 10px;
-    text-align: center;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 26px;
+  color: var(--color-text-strong);
+  line-height: 1.25;
+  margin: 10px 10px;
+  text-align: center;
 }
 
 .horizontalLine {
-    width: 50%;
-    height: 2px;
-    background-color: var(--color-accent);
+  width: 50%;
+  height: 2px;
+  background-color: var(--color-accent);
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
 }
