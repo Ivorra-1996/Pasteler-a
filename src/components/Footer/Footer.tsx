@@ -4,7 +4,7 @@ import { Divider } from '../Divider';
 
 const Footer = () => {
   return (
-    <div className={styles.footer}>
+    <div id="contacto" className={styles.footer}>
         <div className={styles.content}>
             <Divider />
             <div className={styles.container}>

@@ -1,9 +1,18 @@
+.section {
+    padding: var(--space-6) var(--space-3);
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
 .filterSection {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 20px;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--space-3) 0 0;
     flex-wrap: wrap;
 }
 
@@ -17,8 +26,13 @@
 .searchContainer {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     flex-grow: 1;
+}
+
+.searchIcon {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
 }
 
 .searchInput {
@@ -50,11 +64,6 @@
     gap: 8px;
 }
 
-.dropbtn img {
-    width: 20px;
-    height: auto;
-}
-
 .dropdownContent {
     position: absolute;
     top: 45px;
@@ -79,10 +88,12 @@
 
 .tagItem {
     background-color: transparent;
+    border: none;
     padding: 5px 10px;
     margin-left: -5px;
     display: flex;
     align-items: center;
+    text-align: left;
     cursor: pointer;
     color: var(--color-accent);
     font-family: var(--font-body);
@@ -102,26 +113,23 @@
     margin-right: 6px;
 }
 
-.tagItem button {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    top: 4px;
-    right: -6px;
+.tagRemove {
+    margin-left: 6px;
+    width: 16px;
+    height: 16px;
     background-color: var(--color-text-strong);
     color: var(--color-bg);
     border: none;
     border-radius: 50%;
-    padding: 5px;
-    font-size: 8px;
-    font-weight: bold;
+    padding: 0;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
-.tagItem button:hover {
+.tagRemove:hover {
     background-color: var(--color-accent);
 }
 
@@ -164,12 +172,20 @@
     background-color: var(--color-accent-hover);
 }
 
+.productImageButton {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
 .productCard img{
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     border: 1px solid var(--color-border);
-    filter: saturate(0.7) sepia(0.45) contrast(1.03);
 }
 
 .productCard h3{
@@ -197,7 +213,6 @@
     height: 380px;
     object-fit: cover;
     border: 1px solid var(--color-border);
-    filter: saturate(0.7) sepia(0.45) contrast(1.03);
 }
 
 .info {
@@ -282,8 +297,12 @@
 }
 
 @media (max-width: 480px) {
+    .section {
+        padding: var(--space-5) var(--space-2);
+    }
+
     .filterSection {
-        padding: 14px;
+        padding-top: var(--space-2);
     }
 
     .productsGrid {

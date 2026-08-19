@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { Minus, Plus } from 'lucide-react';
 import styles from './QuantityButton.module.css';
 
 type QuantityButtonProps = {
@@ -26,12 +27,12 @@ const QuantityButton: React.FC<QuantityButtonProps> = ({ onQuantityChange }) => 
 
   return (
     <div className={styles.quantityButton}>
-      <button className={styles.button} onClick={decrease}>
-        -
+      <button type="button" className={styles.button} onClick={decrease} aria-label="Disminuir cantidad">
+        <Minus size={16} strokeWidth={2.5} />
       </button>
       <span className={styles.quantity}>{quantity}</span>
-      <button className={styles.button} onClick={increase}>
-        +
+      <button type="button" className={styles.button} onClick={increase} aria-label="Aumentar cantidad">
+        <Plus size={16} strokeWidth={2.5} />
       </button>
     </div>
   );

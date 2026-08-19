@@ -4,6 +4,11 @@ import { Header } from '../Header';
 import { Catalog } from '../Catalog';
 import { Footer } from '../Footer';
 import { News } from '../News';
+import { About } from '../About';
+import { Process } from '../Process';
+import { Testimonials } from '../Testimonials';
+import { PaymentMethods } from '../PaymentMethods';
+import { Reveal } from '../Reveal';
 import { Logo } from './components/Logo';
 import styles from './Initiation.module.css';
 import type { CartItem, Product } from '@/types/cart';
@@ -39,12 +44,18 @@ const Initiation = () => {
   return (
     <div>
       <Header cart={cart} /> {/* Pasa el carrito al Header */}
-      <Logo />
-      <p className={styles.contentText}>
-        ♥ Creamos pasteles artesanales que hacen de cada ocasión un momento especial. ♥
-      </p>
+      <Reveal>
+        <Logo />
+        <p className={styles.contentText}>
+          ♥ Creamos pasteles artesanales que hacen de cada ocasión un momento especial. ♥
+        </p>
+      </Reveal>
       <News addToCart={addToCart} />
       <Catalog addToCart={addToCart} />
+      <About />
+      <Process />
+      <Testimonials />
+      <PaymentMethods />
       <Footer />
     </div>
   );

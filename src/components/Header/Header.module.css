@@ -1,10 +1,18 @@
 .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: transparent;
+    background-color: var(--color-bg);
     width: 100%;
     padding: 0 16px;
+    transition: box-shadow 0.25s ease;
+}
+
+.header.scrolled {
+    box-shadow: 0 4px 16px rgba(74, 42, 20, 0.1);
 }
 
 .content{
@@ -21,8 +29,16 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     font-size: 18px;
+}
+
+.content a {
     color: var(--color-text-strong);
     cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.content a:hover {
+    color: var(--color-accent);
 }
 
 @media (max-width: 768px) {

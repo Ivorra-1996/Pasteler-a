@@ -1,24 +1,39 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next-nprogress-bar';
+import { ArrowLeft, Minus, Plus, Trash2 } from 'lucide-react';
 import style from './Cart.module.css';
 import type { CartItem } from '@/types/cart';
+import { getCartData, setCartData } from '@/utils/cartUtils';
+
+const BackToCatalog = ({ onClick }: { onClick: () => void }) => (
+  <button type="button" className={style.backLink} onClick={onClick}>
+    <ArrowLeft size={14} strokeWidth={2.5} />
+    Volver al catálogo
+  </button>
+);
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [orderPlaced, setOrderPlaced] = useState(false);
+  const [confirmedTotal, setConfirmedTotal] = useState(0);
+  const isFirstSave = useRef(true);
+  const { push } = useRouter();
 
    // Recuperamos los datos del carrito al montar el componente
   useEffect(() => {
-    const storedCartData = localStorage.getItem('cartData');
-    if (storedCartData) {
-      setCartItems(JSON.parse(storedCartData));
-    }
+    setCartItems(getCartData());
   }, []); // Solo se ejecuta al montar el componente
 
   // Guardamos los datos en localStorage cuando cambian los items del carrito
+  // (se ignora la primera pasada, antes de que se hayan cargado los datos guardados,
+  // para no pisarlos con el estado inicial vacío)
   useEffect(() => {
-    if (cartItems.length > 0) {
-      localStorage.setItem('cartData', JSON.stringify(cartItems));
+    if (isFirstSave.current) {
+      isFirstSave.current = false;
+      return;
     }
+    setCartData(cartItems);
   }, [cartItems]); // Se ejecuta cada vez que cartItems cambia
 
   const handleQuantityChange = (id: number, delta: number) => {
@@ -40,8 +55,33 @@ const Cart = () => {
     0
   );
 
+  const handleCheckout = () => {
+    setConfirmedTotal(totalPrice);
+    setOrderPlaced(true);
+    setCartItems([]);
+  };
+
+  if (orderPlaced) {
+    return (
+      <div className={style.page}>
+        <BackToCatalog onClick={() => push('/')} />
+        <div className={style.confirmation}>
+          <h2>¡Gracias por tu pedido!</h2>
+          <p>
+            Confirmamos tu compra por <strong>${confirmedTotal}</strong>. Te vamos a contactar a la brevedad para coordinar el pago y la entrega.
+          </p>
+          <button className={style.cartCheckout} onClick={() => push('/')}>
+            Volver al catálogo
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={style.cartContainer}>
+    <div className={style.page}>
+      <BackToCatalog onClick={() => push('/')} />
+      <div className={style.cartContainer}>
       {/* Left Column: Product List */}
       <div className={style.cartProducts}>
         <h2>Carrito de Compras</h2>
@@ -52,13 +92,18 @@ const Cart = () => {
               <h4>{item.name}</h4>
               <p>Precio: ${item.price}</p>
               <div className={style.cartItemQuantity}>
-                <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
+                <button type="button" onClick={() => handleQuantityChange(item.id, -1)} aria-label="Disminuir cantidad">
+                  <Minus size={14} strokeWidth={2.5} />
+                </button>
                 <span>{item.quantity}</span>
-                <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>
+                <button type="button" onClick={() => handleQuantityChange(item.id, 1)} aria-label="Aumentar cantidad">
+                  <Plus size={14} strokeWidth={2.5} />
+                </button>
               </div>
               <p>Total: ${parseFloat(item.price) * item.quantity}</p>
             </div>
-            <button onClick={() => handleRemoveItem(item.id)} className={style.cartItemRemove}>
+            <button type="button" onClick={() => handleRemoveItem(item.id)} className={style.cartItemRemove}>
+              <Trash2 size={14} strokeWidth={2} />
               Eliminar
             </button>
           </div>
@@ -76,7 +121,14 @@ const Cart = () => {
           <li>Mercado Pago</li>
           <li>Pago en efectivo</li>
         </ul>
-        <button className={style.cartCheckout}>Finalizar Compra</button>
+        <button
+          className={style.cartCheckout}
+          onClick={handleCheckout}
+          disabled={cartItems.length === 0}
+        >
+          Finalizar Compra
+        </button>
+      </div>
       </div>
     </div>
   );

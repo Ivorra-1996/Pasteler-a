@@ -1,12 +1,21 @@
 .cartContainer {
   position: relative;
   display: inline-block;
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
 }
 
 .cartImage {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
+  color: var(--color-text-strong);
+  transition: color 0.15s ease;
+}
+
+.cartContainer:hover .cartImage {
+  color: var(--color-accent);
 }
 
 .cartCount {

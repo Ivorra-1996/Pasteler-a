@@ -1,8 +1,10 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import styles from "./Catalog.module.css";
-import { Title } from "../Title";
 import { QuantityButton } from "../QuantityButton";
+import { SlidersHorizontal, Search, X } from "lucide-react";
+import { Reveal } from "../Reveal";
+import { SectionHeading } from "../SectionHeading";
 import type { Product } from "@/types/cart";
 
 const productos = [
@@ -24,43 +26,43 @@ const productos = [
     },
     {
         id: 3,
-        name: "Torta Cremosa",
+        name: "Cheesecake de Frutos del Bosque",
         img: "/img/pexels-eric-mufasa-578798-1414234.jpg",
-        description: "Torta cremosa con bizcocho esponjoso y ganache brillante",
+        description: "Bizcocho cremoso con coulis de frutos del bosque y un toque brillante de gelatina.",
         tags: ["Torta", "Cremoso", "Brillante"],
         price: 1500,
     },
     {
         id: 4,
-        name: "Torta Cremosa",
-        img: "/img/pexels-eric-mufasa-578798-1414234.jpg",
-        description: "Torta cremosa con bizcocho esponjoso y ganache brillante",
-        tags: ["Torta", "Cremoso", "Brillante"],
-        price: 1500,
+        name: "Torta Marmolada",
+        img: "/img/pexels-abhinavcoca-291528.jpg",
+        description: "Bizcocho marmolado de chocolate y vainilla, húmedo por dentro y con ganache brillante.",
+        tags: ["Torta", "Chocolate", "Húmedo", "Brillante"],
+        price: 1100,
     },
     {
         id: 5,
-        name: "Torta Cremosa",
-        img: "/img/pexels-eric-mufasa-578798-1414234.jpg",
-        description: "Torta cremosa con bizcocho esponjoso y ganache brillante",
-        tags: ["Torta", "Cremoso", "Brillante"],
-        price: 1500,
+        name: "Torta de Dulce de Leche",
+        img: "/img/pexels-valeriya-827516.jpg",
+        description: "Capas esponjosas rellenas de dulce de leche casero, dulce y suave en cada bocado.",
+        tags: ["Torta", "Dulce", "Leche", "Esponjoso"],
+        price: 1300,
     },
     {
         id: 6,
-        name: "Torta Cremosa",
+        name: "Torta de Nueces Caramelizadas",
         img: "/img/pexels-eric-mufasa-578798-1414234.jpg",
-        description: "Torta cremosa con bizcocho esponjoso y ganache brillante",
-        tags: ["Torta", "Cremoso", "Brillante"],
-        price: 1500,
+        description: "Bizcocho húmedo cubierto con nueces caramelizadas y un baño de ganache brillante.",
+        tags: ["Torta", "Nueces", "Caramelizadas", "Húmedo", "Brillante"],
+        price: 1400,
     },
     {
         id: 7,
-        name: "Torta Cremosa",
-        img: "/img/pexels-eric-mufasa-578798-1414234.jpg",
-        description: "Torta cremosa con bizcocho esponjoso y ganache brillante",
-        tags: ["Torta", "Cremoso", "Brillante"],
-        price: 1500,
+        name: "Especial de la Casa",
+        img: "/img/pexels-abhinavcoca-291528.jpg",
+        description: "Nuestra combinación preferida: bizcocho de chocolate, dulce de leche y virutas crocantes.",
+        tags: ["Torta", "Chocolate", "Dulce", "Leche", "Virutas"],
+        price: 1600,
     },
 ];
 
@@ -127,25 +129,29 @@ const Catalog = ({ addToCart }: CatalogProps) => {
     };
 
     return (
-        <div>
-            <Title title='Catálogo' background='#C1652B'/>
+        <div id="catalogo" className={styles.section}>
+            <Reveal>
+                <SectionHeading kicker="Catálogo" title="Elegí tu torta favorita" />
+            </Reveal>
             <div className={styles.filterSection}>
                 {/* Sección de Filtro */}
                 <div className={styles.filterHeader}>
                     <div className={styles.dropdown}>
                         <button className={styles.dropbtn} onClick={toggleMenu}>
-                            {<img src="/img/Filter.png" alt="filtro" width={20} />}Filtros
+                            <SlidersHorizontal size={18} strokeWidth={2} />
+                            Filtros
                         </button>
                         {menuOpen && (
                             <div className={styles.dropdownContent}>
                                 {filteredTags.map((tag) => (
-                                    <div
+                                    <button
                                         key={tag}
+                                        type="button"
                                         onClick={() => addTag(tag)}
                                         className={styles.tagItem}
                                     >
                                         {tag}
-                                    </div>
+                                    </button>
                                 ))}
                             </div>
                         )}
@@ -154,7 +160,7 @@ const Catalog = ({ addToCart }: CatalogProps) => {
 
                 {/* Sección de Buscador */}
                 <div className={styles.searchContainer}>
-                    <img src="/img/Search.png" alt="buscador" width={20} />
+                    <Search size={18} strokeWidth={2} className={styles.searchIcon} />
                     <input
                         type="text"
                         placeholder="Buscar"
@@ -168,26 +174,29 @@ const Catalog = ({ addToCart }: CatalogProps) => {
                 <div className={styles.selectedTagsContainer}>
                     {selectedTags.map((tag) => (
                         <div key={tag} className={styles.tagItem}>
-                            {tag}{" "}
-                            <button onClick={() => removeTag(tag)}>x</button>
+                            {tag}
+                            <button type="button" className={styles.tagRemove} onClick={() => removeTag(tag)} aria-label={`Quitar filtro ${tag}`}>
+                                <X size={10} strokeWidth={3} />
+                            </button>
                         </div>
                     ))}
                 </div>
                 <div className={styles.catalog}>
                     {/* Catálogo de Productos */}
                     <div className={styles.productsGrid}>
-                        {newProductos.map((producto) => (
-                            <div className={styles.productCard} key={producto.id}>
-                                <img
-                                    src={producto.img}
-                                    alt={producto.name}
-                                    className={styles.productImage}
+                        {newProductos.map((producto, index) => (
+                            <Reveal key={producto.id} delay={Math.min(index, 6) * 0.05} className={styles.productCard}>
+                                <button
+                                    type="button"
+                                    className={styles.productImageButton}
                                     onClick={() => { setProduct(producto); setSelectedQuantity(1); }}
-                                />
-                                <div className={styles.productInfo}>
+                                >
+                                    <img src={producto.img} alt={producto.name} />
+                                </button>
+                                <div>
                                     <h3>{producto.name}</h3>
                                 </div>
-                            </div>
+                            </Reveal>
                         ))}
                     </div>
                     <div className={styles.selectedProduct}>

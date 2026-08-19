@@ -9,7 +9,7 @@
     width: 200px;
     height: 200px;
     background-color: transparent;
-    border-radius: 50%;
+    border-radius: var(--radius-btn);
     border: 2px solid var(--color-accent);
     display: flex;
     justify-content: center;

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './AddToCart.module.css';
 import { useRouter } from 'next-nprogress-bar';
+import { ShoppingCart } from 'lucide-react';
 import { setCartData } from '@/utils/cartUtils';
 import type { CartItem } from '@/types/cart';
 
@@ -25,14 +26,10 @@ const AddToCart: React.FC<AddToCartProps> = ({cart}) => {
   }, [cart]);
 
   return (
-    <div className={styles.cartContainer} onClick={goCart}>
-      <img
-        src="/img/carrito-de-compras.png"
-        alt="Imagen de carrito de compras"
-        className={styles.cartImage}
-      />
+    <button type="button" className={styles.cartContainer} onClick={goCart} aria-label="Ver carrito">
+      <ShoppingCart className={styles.cartImage} strokeWidth={1.75} />
       {cartCount > 0 && <p className={styles.cartCount}>{cartCount}</p>}
-    </div>
+    </button>
   );
 };
 
