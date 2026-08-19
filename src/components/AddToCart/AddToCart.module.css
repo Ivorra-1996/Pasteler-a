@@ -10,12 +10,12 @@
 .cartImage {
   width: 28px;
   height: 28px;
-  color: var(--color-text-strong);
+  color: var(--color-bg);
   transition: color 0.15s ease;
 }
 
 .cartContainer:hover .cartImage {
-  color: var(--color-accent);
+  color: var(--color-accent-2);
 }
 
 .cartCount {

@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import styles from './Header.module.css';
 import { Divider } from '../Divider';
 import { AddToCart } from '../AddToCart';
@@ -30,13 +31,24 @@ const Header = () => {
 
   return (
     <div className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={styles.content}>
-        <Link href="/">Inicio</Link>
-        <Link href="/#nosotros">Nosotros</Link>
-        <Link href="/#contacto">Contacto</Link>
-        <Link href="/#catalogo">Pedidos</Link>
-        <AddToCart />
-      </div>
+      <motion.div
+        className={styles.content}
+        initial={{ opacity: 0, y: -14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <Link href="/" className={styles.brand}>Dulce encanto</Link>
+        <div className={styles.right}>
+          {/* Orden igual al de las secciones en la home: Inicio, Catálogo, Nosotros, Contacto */}
+          <nav className={styles.nav}>
+            <Link href="/">Inicio</Link>
+            <Link href="/#catalogo" className={styles.cta}>Catálogo</Link>
+            <Link href="/#nosotros">Nosotros</Link>
+            <Link href="/#contacto">Contacto</Link>
+          </nav>
+          <AddToCart />
+        </div>
+      </motion.div>
       <Divider />
     </div>
   );

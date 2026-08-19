@@ -5,25 +5,54 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: var(--color-bg);
+    background-color: var(--color-text-strong);
     width: 100%;
-    padding: 0 16px;
     transition: box-shadow 0.25s ease;
 }
 
 .header.scrolled {
-    box-shadow: 0 4px 16px rgba(74, 42, 20, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.content{
+.content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: flex-end;
-    margin: 12px 12px;
+    justify-content: space-between;
+    padding: 18px 28px;
+    gap: 16px;
+    row-gap: 10px;
+}
+
+.brand {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--color-bg);
+    flex-shrink: 0;
+    transition: color 0.15s ease;
+}
+
+.brand:hover {
+    color: var(--color-accent-2);
+}
+
+.right {
+    display: flex;
+    align-items: center;
     gap: 24px;
     row-gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    row-gap: 10px;
+    flex-wrap: wrap;
     font-family: var(--font-body);
     font-weight: 600;
     letter-spacing: 0.06em;
@@ -31,26 +60,72 @@
     font-size: 18px;
 }
 
-.content a {
-    color: var(--color-text-strong);
+.nav a {
+    position: relative;
+    color: var(--color-bg);
     cursor: pointer;
+    padding-bottom: 4px;
     transition: color 0.15s ease;
 }
 
-.content a:hover {
-    color: var(--color-accent);
+.nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1.5px;
+    background: var(--color-accent-2);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+}
+
+.nav a:hover {
+    color: var(--color-accent-2);
+}
+
+.nav a:hover::after {
+    transform: scaleX(1);
+}
+
+.nav .cta {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    padding: 8px 18px;
+    border-radius: var(--radius-btn);
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.nav .cta::after {
+    content: none;
+}
+
+.nav .cta:hover {
+    background: var(--color-accent-hover);
+    color: var(--color-bg);
 }
 
 @media (max-width: 768px) {
-    .content {
+    .nav {
         font-size: 16px;
         gap: 16px;
+    }
+
+    .brand {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .content {
+        justify-content: center;
+        text-align: center;
     }
 }
 
 @media (max-width: 480px) {
-    .content {
-        justify-content: center;
+    .nav {
         font-size: 14px;
         gap: 12px;
     }
