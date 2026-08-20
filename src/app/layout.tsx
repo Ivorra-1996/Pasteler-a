@@ -4,6 +4,7 @@ import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 // Configuración de Geist Sans y Mono
 const geistSans = Geist({
@@ -48,6 +49,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <WhatsAppButton />
         </CartProvider>
       </body>
     </html>

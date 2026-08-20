@@ -83,7 +83,9 @@
 .bottomBar {
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: var(--space-3) var(--space-3) var(--space-4);
+    /* Padding derecho extra: deja lugar al botón flotante de WhatsApp, que
+       queda fijo en esa misma esquina y si no se superpone con este texto. */
+    padding: var(--space-3) 88px var(--space-4) var(--space-3);
     border-top: 1px solid rgba(255, 255, 255, 0.12);
     display: flex;
     align-items: center;
@@ -139,5 +141,7 @@
     .bottomBar {
         flex-direction: column;
         text-align: center;
+        padding-right: var(--space-3);
+        padding-bottom: 72px;
     }
 }
