@@ -8,8 +8,8 @@
   --color-accent-hover: #9C4E1E;
   --color-accent-2: #D89B3C;
   --color-border: #E7D5B6;
-  --font-heading: var(--font-lora), Georgia, serif;
-  --font-body: var(--font-mulish), 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: var(--font-lora, 'Lora', Georgia, serif);
+  --font-body: var(--font-mulish, 'Mulish', 'Helvetica Neue', Arial, sans-serif);
   --radius-btn: 2px;
 
   /* Escala de espaciado */

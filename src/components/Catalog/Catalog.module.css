@@ -8,12 +8,16 @@
 
 .filterSection {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    flex-direction: column;
     max-width: var(--container-max);
     margin: 0 auto;
     padding: var(--space-3) 0 0;
+}
+
+.filterContainer {
+    display: flex;
+    align-items: center;
+    gap: 24px;
     flex-wrap: wrap;
 }
 
@@ -28,7 +32,6 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    flex-grow: 1;
 }
 
 .searchIcon {
@@ -38,7 +41,6 @@
 
 .searchInput {
     background-color: transparent;
-    width: 120px;
     border: none;
     border-bottom: 1px solid var(--color-border);
     outline: none;
@@ -46,7 +48,6 @@
     font-style: normal;
     font-weight: 600;
     color: var(--color-text-strong);
-    font-size: 20px;
     text-transform: uppercase;
 }
 
@@ -55,9 +56,8 @@
     color: var(--color-text-strong);
     font-family: var(--font-body);
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
-    font-size: 22px;
     cursor: pointer;
     border: none;
     display: flex;
@@ -100,7 +100,7 @@
     font-family: var(--font-body);
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 16px;
+    font-size: var(--text-sm);
     position: relative;
 }
 
@@ -196,7 +196,7 @@
     font-family: var(--font-body);
     font-style: normal;
     font-weight: 600;
-    font-size: 14px;
+    font-size: var(--text-sm);
     line-height: 1.5;
     text-transform: uppercase;
     color: var(--color-text-strong);
@@ -222,11 +222,17 @@
     text-align: start;
 }
 
+.productHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
 .info h3 {
     font-family: var(--font-heading);
     font-style: normal;
     font-weight: 700;
-    font-size: 26px;
+    font-size: var(--text-lg);
     color: var(--color-text-strong);
 }
 
@@ -234,7 +240,7 @@
     font-family: var(--font-body);
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
+    font-size: var(--text-sm);
     color: var(--color-text-muted);
 }
 
@@ -281,20 +287,23 @@
     color: var(--color-bg);
 }
 
-.content {
+.purchaseActions {
     display: flex;
+    align-items: stretch;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    justify-content: flex-end;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
 }
 
-.content .valor {
+.info .valor {
     color: var(--color-accent);
     font-family: var(--font-heading);
     font-style: normal;
     font-weight: 700;
-    font-size: 28px;
+    font-size: var(--text-lg);
+    flex-shrink: 0;
 }
 
 .boton {
@@ -310,7 +319,7 @@
     font-family: var(--font-body);
     font-style: normal;
     font-weight: 600;
-    font-size: 12.5px;
+    font-size: var(--text-xs);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-bg);

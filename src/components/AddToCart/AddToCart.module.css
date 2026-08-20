@@ -24,7 +24,7 @@
   left: 20%;
   transform: translateX(-50%);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: var(--text-xs);
   font-weight: 700;
   color: var(--color-accent);
   background-color: var(--color-surface);

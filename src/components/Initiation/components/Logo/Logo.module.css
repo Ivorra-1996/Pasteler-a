@@ -22,7 +22,7 @@
   font-family: var(--font-heading);
   font-style: italic;
   font-weight: 600;
-  font-size: 26px;
+  font-size: var(--text-lg);
   color: var(--color-text-strong);
   line-height: 1.25;
   margin: 10px 10px;
