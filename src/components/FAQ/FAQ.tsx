@@ -36,7 +36,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className={styles.section}>
+    <div id="faq" className={styles.section}>
       <Reveal>
         <SectionHeading kicker="Preguntas frecuentes" title="¿Tenés dudas?" />
       </Reveal>

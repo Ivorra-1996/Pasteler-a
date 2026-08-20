@@ -38,6 +38,7 @@ const Footer = () => {
           <Link href="/">Inicio</Link>
           <Link href="/#nosotros">Nosotros</Link>
           <Link href="/#catalogo">Catálogo</Link>
+          <Link href="/#faq">Preguntas frecuentes</Link>
         </div>
 
         <div className={styles.col}>

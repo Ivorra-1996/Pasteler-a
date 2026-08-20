@@ -19,7 +19,7 @@ const Header = () => {
   // El header es sticky, así que si el navegador restaura una posición de
   // scroll vieja al recargar (F5), el header puede quedar tapando contenido.
   // Evitamos eso arrancando siempre arriba del todo, salvo que la URL apunte
-  // a una sección puntual (#nosotros, #catalogo, #contacto).
+  // a una sección puntual (#nosotros, #catalogo, #faq, #contacto).
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
@@ -39,11 +39,12 @@ const Header = () => {
       >
         <Link href="/" className={styles.brand}>Dulce encanto</Link>
         <div className={styles.right}>
-          {/* Orden igual al de las secciones en la home: Inicio, Catálogo, Nosotros, Contacto */}
+          {/* Orden igual al de las secciones en la home: Inicio, Catálogo, Nosotros, FAQ, Contacto */}
           <nav className={styles.nav}>
             <Link href="/">Inicio</Link>
             <Link href="/#catalogo" className={styles.cta}>Catálogo</Link>
             <Link href="/#nosotros">Nosotros</Link>
+            <Link href="/#faq">Preguntas</Link>
             <Link href="/#contacto">Contacto</Link>
           </nav>
           <AddToCart />
