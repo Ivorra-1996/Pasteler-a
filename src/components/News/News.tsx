@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import styles from './News.module.css';
 import { QuantityButton } from '../QuantityButton';
 import { Reveal } from '../Reveal';
@@ -86,7 +87,15 @@ const News = ({ addToCart }: NewsProps) => {
               onClick={() => handleExpand(producto.id)}
               className={styles.producto}
             >
-              <img src={producto.image} alt={producto.name} className={styles.imagen} />
+              <div className={styles.imageWrap}>
+                <Image
+                  src={producto.image}
+                  alt={producto.name}
+                  fill
+                  sizes="(max-width: 600px) 100vw, 450px"
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
               {expandido === producto.id && (
                 <div className={styles.info}>
                   <div className={styles.productHeader}>

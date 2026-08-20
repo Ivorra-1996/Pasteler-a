@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import styles from './About.module.css';
 import { Reveal } from '../Reveal';
 import { SectionHeading } from '../SectionHeading';
@@ -14,9 +15,12 @@ const About = () => {
     <div id="nosotros" className={styles.section}>
       <div className={styles.inner}>
         <Reveal className={styles.media}>
-          <img
+          <Image
             src="/img/pexels-valeriya-827516.jpg"
             alt="Torta artesanal recién preparada en el taller de Dulce encanto"
+            fill
+            sizes="(max-width: 860px) 100vw, 50vw"
+            style={{ objectFit: 'cover' }}
           />
         </Reveal>
         <Reveal delay={0.1} className={styles.copy}>

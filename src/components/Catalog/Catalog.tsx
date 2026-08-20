@@ -1,6 +1,7 @@
 "use client";
 import type { Product } from "@/types/cart";
 import { Search, SlidersHorizontal, X } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { QuantityButton } from "../QuantityButton";
 import { Reveal } from "../Reveal";
@@ -229,7 +230,13 @@ const Catalog = ({ addToCart }: CatalogProps) => {
                     setSelectedFlavor(producto.sabores[0]);
                   }}
                 >
-                  <img src={producto.img} alt={producto.name} />
+                  <Image
+                    src={producto.img}
+                    alt={producto.name}
+                    fill
+                    sizes="(max-width: 480px) 50vw, (max-width: 900px) 33vw, 16vw"
+                    style={{ objectFit: "cover" }}
+                  />
                 </button>
                 <div>
                   <h3>{producto.name}</h3>
@@ -238,7 +245,15 @@ const Catalog = ({ addToCart }: CatalogProps) => {
             ))}
           </div>
           <div className={styles.selectedProduct}>
-            <img src={producto.img} alt="Imagen de producto seleccionado" />
+            <div className={styles.selectedProductImage}>
+              <Image
+                src={producto.img}
+                alt="Imagen de producto seleccionado"
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
             <div className={styles.info}>
               <div className={styles.productHeader}>
                 <h3>{producto.name}</h3>

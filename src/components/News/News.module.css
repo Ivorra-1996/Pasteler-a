@@ -35,15 +35,15 @@
     border: 1px solid var(--color-border);
 }
 
-.producto img {
+.imageWrap {
+    position: relative;
     width: 100%;
     flex: 1;
     min-height: 0;
-    object-fit: cover;
     transition: flex 0.3s ease;
 }
 
-.revealExpanded .producto img {
+.revealExpanded .imageWrap {
     flex: 0 0 320px;
 }
 
@@ -134,7 +134,7 @@
         height: 480px;
     }
 
-    .revealExpanded .producto img {
+    .revealExpanded .imageWrap {
         flex: 0 0 220px;
     }
 }

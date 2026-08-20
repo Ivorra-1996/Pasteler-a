@@ -2,6 +2,7 @@
 import { useCart } from "@/context/CartContext";
 import { ArrowLeft, Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next-nprogress-bar";
+import Image from "next/image";
 import { useState } from "react";
 import style from "./Cart.module.css";
 
@@ -56,9 +57,11 @@ const Cart = () => {
         <div className={style.cartProducts}>
           {cart.map((item) => (
             <div key={item.id} className={style.cartItem}>
-              <img
+              <Image
                 src={item.image}
                 alt={item.name}
+                width={100}
+                height={130}
                 className={style.cartItemImage}
               />
               <div className={style.cartItemDetails}>
