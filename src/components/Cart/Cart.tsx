@@ -1,9 +1,9 @@
-'use client';
-import React, { useState } from 'react';
-import { useRouter } from 'next-nprogress-bar';
-import { ArrowLeft, Minus, Plus, Trash2 } from 'lucide-react';
-import style from './Cart.module.css';
-import { useCart } from '@/context/CartContext';
+"use client";
+import { useCart } from "@/context/CartContext";
+import { ArrowLeft, Minus, Plus, Trash2 } from "lucide-react";
+import { useRouter } from "next-nprogress-bar";
+import { useState } from "react";
+import style from "./Cart.module.css";
 
 const BackToCatalog = ({ onClick }: { onClick: () => void }) => (
   <button type="button" className={style.backLink} onClick={onClick}>
@@ -20,7 +20,7 @@ const Cart = () => {
 
   const totalPrice = cart.reduce(
     (total, item) => total + parseFloat(item.price) * item.quantity,
-    0
+    0,
   );
 
   const handleCheckout = () => {
@@ -32,13 +32,14 @@ const Cart = () => {
   if (orderPlaced) {
     return (
       <div className={style.page}>
-        <BackToCatalog onClick={() => push('/')} />
+        <BackToCatalog onClick={() => push("/")} />
         <div className={style.confirmation}>
           <h2>¡Gracias por tu pedido!</h2>
           <p>
-            Confirmamos tu compra por <strong>${confirmedTotal}</strong>. Te vamos a contactar a la brevedad para coordinar el pago y la entrega.
+            Confirmamos tu compra por <strong>${confirmedTotal}</strong>. Te
+            vamos a contactar a la brevedad para coordinar el pago y la entrega.
           </p>
-          <button className={style.cartCheckout} onClick={() => push('/')}>
+          <button className={style.cartCheckout} onClick={() => push("/")}>
             Volver al catálogo
           </button>
         </div>
@@ -48,56 +49,74 @@ const Cart = () => {
 
   return (
     <div className={style.page}>
-      <BackToCatalog onClick={() => push('/')} />
+      <BackToCatalog onClick={() => push("/")} />
+      <h2>Carrito de Compras</h2>
       <div className={style.cartContainer}>
-      {/* Left Column: Product List */}
-      <div className={style.cartProducts}>
-        <h2>Carrito de Compras</h2>
-        {cart.map((item) => (
-          <div key={item.id} className={style.cartItem}>
-            <img src={item.image} alt={item.name} className={style.cartItemImage} />
-            <div className={style.cartItemDetails}>
-              <h4>{item.name}</h4>
-              {item.flavor && <p className={style.itemFlavor}>Sabor: {item.flavor}</p>}
-              <p>Precio: ${item.price}</p>
-              <div className={style.cartItemQuantity}>
-                <button type="button" onClick={() => updateQuantity(item.id, -1)} aria-label="Disminuir cantidad">
-                  <Minus size={14} strokeWidth={2.5} />
-                </button>
-                <span>{item.quantity}</span>
-                <button type="button" onClick={() => updateQuantity(item.id, 1)} aria-label="Aumentar cantidad">
-                  <Plus size={14} strokeWidth={2.5} />
-                </button>
+        {/* Left Column: Product List */}
+        <div className={style.cartProducts}>
+          {cart.map((item) => (
+            <div key={item.id} className={style.cartItem}>
+              <img
+                src={item.image}
+                alt={item.name}
+                className={style.cartItemImage}
+              />
+              <div className={style.cartItemDetails}>
+                <h4>{item.name}</h4>
+                {item.flavor && (
+                  <p className={style.itemFlavor}>Sabor: {item.flavor}</p>
+                )}
+                <p>Precio: ${item.price}</p>
+                <div className={style.cartItemQuantity}>
+                  <button
+                    type="button"
+                    onClick={() => updateQuantity(item.id, -1)}
+                    aria-label="Disminuir cantidad"
+                  >
+                    <Minus size={14} strokeWidth={2.5} />
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button
+                    type="button"
+                    onClick={() => updateQuantity(item.id, 1)}
+                    aria-label="Aumentar cantidad"
+                  >
+                    <Plus size={14} strokeWidth={2.5} />
+                  </button>
+                </div>
+                <p>Total: ${parseFloat(item.price) * item.quantity}</p>
               </div>
-              <p>Total: ${parseFloat(item.price) * item.quantity}</p>
+              <button
+                type="button"
+                onClick={() => removeItem(item.id)}
+                className={style.cartItemRemove}
+              >
+                <Trash2 size={14} strokeWidth={2} />
+                Eliminar
+              </button>
             </div>
-            <button type="button" onClick={() => removeItem(item.id)} className={style.cartItemRemove}>
-              <Trash2 size={14} strokeWidth={2} />
-              Eliminar
-            </button>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* Right Column: Payment Methods */}
-      <div className={style.cartSummary}>
-        <h2>Resumen de Compra</h2>
-        <p>Total: ${totalPrice}</p>
-        <h3>Métodos de Pago</h3>
-        <ul>
-          <li>Tarjeta de Crédito/Débito</li>
-          <li>Transferencia Bancaria</li>
-          <li>Mercado Pago</li>
-          <li>Pago en efectivo</li>
-        </ul>
-        <button
-          className={style.cartCheckout}
-          onClick={handleCheckout}
-          disabled={cart.length === 0}
-        >
-          Finalizar Compra
-        </button>
-      </div>
+        {/* Right Column: Payment Methods */}
+        <div className={style.cartSummary}>
+          <h2>Resumen de Compra</h2>
+          <p>Total: ${totalPrice}</p>
+          <h3>Métodos de Pago</h3>
+          <ul>
+            <li>Tarjeta de Crédito/Débito</li>
+            <li>Transferencia Bancaria</li>
+            <li>Mercado Pago</li>
+            <li>Pago en efectivo</li>
+          </ul>
+          <button
+            className={style.cartCheckout}
+            onClick={handleCheckout}
+            disabled={cart.length === 0}
+          >
+            Finalizar Compra
+          </button>
+        </div>
       </div>
     </div>
   );
