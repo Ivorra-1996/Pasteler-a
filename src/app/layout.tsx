@@ -5,6 +5,7 @@ import { CartProvider } from "@/context/CartContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { SITE_URL } from "@/utils/site";
 
 // Configuración de Geist Sans y Mono
 const geistSans = Geist({
@@ -30,9 +31,6 @@ const mulish = Mulish({
   weight: ["400", "500", "600", "700"],
 });
 
-// Dominio de ejemplo (mock, igual que el resto de los datos de contacto) —
-// reemplazar por el dominio real cuando el sitio tenga uno.
-const SITE_URL = "https://dulceencanto.com.ar";
 const SITE_TITLE = "Dulce encanto";
 const SITE_DESCRIPTION = "Pastelería artesanal — tortas hechas a pedido.";
 
