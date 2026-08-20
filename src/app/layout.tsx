@@ -30,9 +30,29 @@ const mulish = Mulish({
   weight: ["400", "500", "600", "700"],
 });
 
+// Dominio de ejemplo (mock, igual que el resto de los datos de contacto) —
+// reemplazar por el dominio real cuando el sitio tenga uno.
+const SITE_URL = "https://dulceencanto.com.ar";
+const SITE_TITLE = "Dulce encanto";
+const SITE_DESCRIPTION = "Pastelería artesanal — tortas hechas a pedido.";
+
 export const metadata: Metadata = {
-  title: "Dulce encanto",
-  description: "Pastelería artesanal — tortas hechas a pedido.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_TITLE,
+    locale: "es_AR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
