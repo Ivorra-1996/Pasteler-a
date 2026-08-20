@@ -64,6 +64,12 @@
   flex: 1;
 }
 
+.itemFlavor {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
 .cartItemQuantity {
   display: flex;
   align-items: center;

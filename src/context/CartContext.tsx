@@ -6,7 +6,7 @@ import { getCartData, setCartData } from '@/utils/cartUtils';
 type CartContextValue = {
   cart: CartItem[];
   cartCount: number;
-  addToCart: (producto: Product, quantity: number) => void;
+  addToCart: (producto: Product, quantity: number, flavor?: string) => void;
   updateQuantity: (id: number, delta: number) => void;
   removeItem: (id: number) => void;
   clearCart: () => void;
@@ -38,14 +38,14 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     setCartData(cart);
   }, [cart]);
 
-  const addToCart = (producto: Product, quantity: number) => {
+  const addToCart = (producto: Product, quantity: number, flavor?: string) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === producto.id);
 
       if (existingItem) {
         return prevCart.map((item) =>
           item.id === producto.id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: item.quantity + quantity, ...(flavor ? { flavor } : {}) }
             : item
         );
       }
@@ -58,6 +58,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
           price: producto.price,
           quantity,
           image: producto.image,
+          ...(flavor ? { flavor } : {}),
         },
       ];
     });

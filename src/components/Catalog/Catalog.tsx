@@ -15,6 +15,7 @@ const productos = [
         description: "Capas de bizcocho de chocolate húmedo y esponjoso, rellenas con generoso dulce de leche cremoso. Cubierta con ganache de chocolate brillante y decorada con virutas de chocolate y un toque de nueces caramelizadas.",
         tags: ["Torta", "Chocolate", "Dulce", "Leche", "Ganache", "Virutas"],
         price: 1000,
+        sabores: ["Chocolate clásico", "Chocolate con dulce de leche", "Chocolate con nueces"],
     },
     {
         id: 2,
@@ -23,6 +24,7 @@ const productos = [
         description: "Torta de nueces con bizcocho húmedo y nueces caramelizadas",
         tags: ["Torta", "Nueces", "Caramelizadas", "Bizcocho", "Húmedo"],
         price: 1200,
+        sabores: ["Nueces clásica", "Nueces con caramelo"],
     },
     {
         id: 3,
@@ -31,6 +33,7 @@ const productos = [
         description: "Bizcocho cremoso con coulis de frutos del bosque y un toque brillante de gelatina.",
         tags: ["Torta", "Cremoso", "Brillante"],
         price: 1500,
+        sabores: ["Frutos del bosque", "Frutilla", "Arándanos"],
     },
     {
         id: 4,
@@ -39,6 +42,7 @@ const productos = [
         description: "Bizcocho marmolado de chocolate y vainilla, húmedo por dentro y con ganache brillante.",
         tags: ["Torta", "Chocolate", "Húmedo", "Brillante"],
         price: 1100,
+        sabores: ["Chocolate y vainilla"],
     },
     {
         id: 5,
@@ -47,6 +51,7 @@ const productos = [
         description: "Capas esponjosas rellenas de dulce de leche casero, dulce y suave en cada bocado.",
         tags: ["Torta", "Dulce", "Leche", "Esponjoso"],
         price: 1300,
+        sabores: ["Dulce de leche clásica", "Dulce de leche con nueces"],
     },
     {
         id: 6,
@@ -55,6 +60,7 @@ const productos = [
         description: "Bizcocho húmedo cubierto con nueces caramelizadas y un baño de ganache brillante.",
         tags: ["Torta", "Nueces", "Caramelizadas", "Húmedo", "Brillante"],
         price: 1400,
+        sabores: ["Nueces caramelizadas"],
     },
     {
         id: 7,
@@ -63,6 +69,7 @@ const productos = [
         description: "Nuestra combinación preferida: bizcocho de chocolate, dulce de leche y virutas crocantes.",
         tags: ["Torta", "Chocolate", "Dulce", "Leche", "Virutas"],
         price: 1600,
+        sabores: ["Especial de la casa"],
     },
 ];
 
@@ -83,7 +90,7 @@ const tags = [
 ];
 
 type CatalogProps = {
-    addToCart: (producto: Product, cantidad: number) => void;
+    addToCart: (producto: Product, cantidad: number, sabor?: string) => void;
 };
 
 const Catalog = ({ addToCart }: CatalogProps) => {
@@ -92,9 +99,10 @@ const Catalog = ({ addToCart }: CatalogProps) => {
     const [search, setSearch] = useState("");
     const [newProductos, setNewProductos] = useState(productos);
     const [producto, setProduct] = useState({
-        id: productos[0].id, name: newProductos[0].name, img: newProductos[0].img, description: newProductos[0].description, tags: newProductos[0].tags, price: newProductos[0].price
+        id: productos[0].id, name: newProductos[0].name, img: newProductos[0].img, description: newProductos[0].description, tags: newProductos[0].tags, price: newProductos[0].price, sabores: newProductos[0].sabores
     });
     const [selectedQuantity, setSelectedQuantity] = useState(1);
+    const [selectedFlavor, setSelectedFlavor] = useState<string | undefined>(productos[0].sabores[0]);
 
     useEffect(() => {
         setNewProductos(
@@ -189,7 +197,7 @@ const Catalog = ({ addToCart }: CatalogProps) => {
                                 <button
                                     type="button"
                                     className={styles.productImageButton}
-                                    onClick={() => { setProduct(producto); setSelectedQuantity(1); }}
+                                    onClick={() => { setProduct(producto); setSelectedQuantity(1); setSelectedFlavor(producto.sabores[0]); }}
                                 >
                                     <img src={producto.img} alt={producto.name} />
                                 </button>
@@ -204,6 +212,23 @@ const Catalog = ({ addToCart }: CatalogProps) => {
                         <div className={styles.info}>
                               <h3>{producto.name}</h3>
                               <p>{producto.description}</p>
+                              {producto.sabores.length > 1 && (
+                                <div className={styles.flavors}>
+                                    <span className={styles.flavorsLabel}>Sabor</span>
+                                    <div className={styles.flavorOptions}>
+                                        {producto.sabores.map((sabor) => (
+                                            <button
+                                                key={sabor}
+                                                type="button"
+                                                className={`${styles.flavorChip} ${selectedFlavor === sabor ? styles.flavorChipActive : ''}`}
+                                                onClick={() => setSelectedFlavor(sabor)}
+                                            >
+                                                {sabor}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                              )}
                               <div className={styles.content}>
                                 <p className={styles.valor}>$ {producto.price}</p>
                                 <QuantityButton onQuantityChange={setSelectedQuantity} />
@@ -215,7 +240,7 @@ const Catalog = ({ addToCart }: CatalogProps) => {
                                         description: producto.description,
                                         price: String(producto.price),
                                         image: producto.img,
-                                    }, selectedQuantity)}
+                                    }, selectedQuantity, selectedFlavor)}
                                 >
                                     Añadir al carrito
                                 </button>

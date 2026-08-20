@@ -58,6 +58,7 @@ const Cart = () => {
             <img src={item.image} alt={item.name} className={style.cartItemImage} />
             <div className={style.cartItemDetails}>
               <h4>{item.name}</h4>
+              {item.flavor && <p className={style.itemFlavor}>Sabor: {item.flavor}</p>}
               <p>Precio: ${item.price}</p>
               <div className={style.cartItemQuantity}>
                 <button type="button" onClick={() => updateQuantity(item.id, -1)} aria-label="Disminuir cantidad">

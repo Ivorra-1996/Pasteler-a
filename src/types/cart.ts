@@ -4,6 +4,7 @@ export type CartItem = {
   price: string;
   quantity: number;
   image: string;
+  flavor?: string;
 };
 
 export type Product = {

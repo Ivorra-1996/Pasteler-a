@@ -238,6 +238,49 @@
     color: var(--color-text-muted);
 }
 
+.flavors {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.flavorsLabel {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.flavorOptions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.flavorChip {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 6px 14px;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-text-strong);
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.flavorChip:hover {
+    border-color: var(--color-accent);
+}
+
+.flavorChipActive {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-bg);
+}
+
 .content {
     display: flex;
     flex-direction: row;
