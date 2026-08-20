@@ -9,13 +9,26 @@
   position: relative;
   width: 200px;
   height: 200px;
+  perspective: 800px;
+}
+
+.shapeShadow {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  border: 2px solid var(--color-accent-2);
+  transition: transform 0.5s ease, border-radius 0.5s ease;
 }
 
 .shape {
   position: absolute;
   inset: 0;
-  background-color: transparent;
+  /* Sólido (no transparente): tapa la mitad de la sombra de atrás, dejando
+     asomar solo el borde inferior-derecho — así se lee como dos capas
+     apiladas en vez de dos contornos superpuestos. */
+  background-color: var(--color-bg);
   border: 2px solid var(--color-accent);
+  backface-visibility: hidden;
 }
 
 .brandName {
