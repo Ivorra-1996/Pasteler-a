@@ -5,6 +5,7 @@ import { About } from '../About';
 import { Process } from '../Process';
 import { Testimonials } from '../Testimonials';
 import { PaymentMethods } from '../PaymentMethods';
+import { FAQ } from '../FAQ';
 import { Reveal } from '../Reveal';
 import { Logo } from './components/Logo';
 import styles from './Initiation.module.css';
@@ -27,6 +28,7 @@ const Initiation = () => {
       <Process />
       <Testimonials />
       <PaymentMethods />
+      <FAQ />
     </div>
   );
 };
