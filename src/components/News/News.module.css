@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: stretch;
     gap: 8px;
-    height: 420px;
+    height: 480px;
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 var(--space-3);
@@ -44,7 +44,7 @@
 }
 
 .revealExpanded .producto img {
-    flex: 0 0 260px;
+    flex: 0 0 320px;
 }
 
 .info {
@@ -54,6 +54,13 @@
     line-height: 1.5;
     text-align: start;
     padding: 16px 20px;
+}
+
+.productHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
 }
 
 .info h3 {
@@ -70,21 +77,22 @@
     color: var(--color-text-muted);
 }
 
-.content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.content .valor {
+.info .valor {
     color: var(--color-accent);
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: var(--text-xl);
+    flex-shrink: 0;
+}
+
+.purchaseActions {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    justify-content: flex-end;
+    flex-direction: row;
 }
 
 .boton {
@@ -93,7 +101,6 @@
     padding: 13px 26px;
     cursor: pointer;
     border-radius: var(--radius-btn);
-    margin-top: 10px;
     font-family: var(--font-body);
     font-weight: 600;
     font-size: var(--text-xs);
@@ -124,6 +131,10 @@
     }
 
     .revealExpanded .producto {
-        height: 460px;
+        height: 480px;
+    }
+
+    .revealExpanded .producto img {
+        flex: 0 0 220px;
     }
 }

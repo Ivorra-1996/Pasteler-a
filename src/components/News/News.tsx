@@ -89,10 +89,12 @@ const News = ({ addToCart }: NewsProps) => {
               <img src={producto.image} alt={producto.name} className={styles.imagen} />
               {expandido === producto.id && (
                 <div className={styles.info}>
-                  <h3>{producto.name}</h3>
-                  <p>{producto.description}</p>
-                  <div className={styles.content}>
+                  <div className={styles.productHeader}>
+                    <h3>{producto.name}</h3>
                     <p className={styles.valor}>$ {producto.price}</p>
+                  </div>
+                  <p>{producto.description}</p>
+                  <div className={styles.purchaseActions}>
                     <QuantityButton onQuantityChange={handleQuantityChange} />
                     <button
                       className={styles.boton}
