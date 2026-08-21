@@ -1,0 +1,6 @@
+.divider{
+    width: auto;
+    height: 0px;
+    border: none;
+    border-top: 3px solid var(--color-accent);
+}

@@ -1,0 +1,147 @@
+.footer {
+    background-color: var(--color-text-strong);
+    border-top: 3px solid var(--color-accent);
+    scroll-margin-top: 80px;
+}
+
+.inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--space-5) var(--space-3) var(--space-4);
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.4fr;
+    gap: var(--space-4);
+}
+
+.brandCol {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.brand {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 600;
+    font-size: var(--text-xl);
+    color: var(--color-bg);
+}
+
+.tagline {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-accent-2);
+    max-width: 320px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.colTitle {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent-2);
+    margin-bottom: 4px;
+}
+
+.col a {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-bg);
+    opacity: 0.9;
+    transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.col a:hover {
+    color: var(--color-accent-2);
+    opacity: 1;
+}
+
+.contactLine {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-bg);
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.contactLine svg {
+    color: var(--color-accent-2);
+    flex-shrink: 0;
+}
+
+.bottomBar {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    /* Padding derecho extra: deja lugar al botón flotante de WhatsApp, que
+       queda fijo en esa misma esquina y si no se superpone con este texto. */
+    padding: var(--space-3) 88px var(--space-4) var(--space-3);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.bottomBar p {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    color: var(--color-bg);
+    opacity: 0.75;
+}
+
+.backToTop {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    color: var(--color-bg);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.backToTop:hover {
+    opacity: 1;
+    color: var(--color-accent-2);
+}
+
+@media (max-width: 860px) {
+    .inner {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .brandCol {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 560px) {
+    .inner {
+        grid-template-columns: 1fr;
+    }
+
+    .bottomBar {
+        flex-direction: column;
+        text-align: center;
+        padding-right: var(--space-3);
+        padding-bottom: 72px;
+    }
+}
