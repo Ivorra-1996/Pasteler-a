@@ -13,14 +13,10 @@ const InstagramIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
-/**
- * Fotos de ejemplo (placeholder) — reemplazar por fotos reales de pedidos
- * entregados en cuanto estén disponibles.
- */
 const fotos = [
-  { src: '/img/pexels-abhinavcoca-291528.jpg', alt: 'Torta de chocolate entregada a un cliente' },
-  { src: '/img/pexels-valeriya-827516.jpg', alt: 'Torta de nueces entregada a un cliente' },
-  { src: '/img/pexels-eric-mufasa-578798-1414234.jpg', alt: 'Cheesecake entregado a un cliente' },
+  { src: '/img/bizcochuelo-3.jpg', alt: 'Bizcochuelo casero recién horneado' },
+  { src: '/img/torta-matilda.jpg', alt: 'Torta Matilda entregada a un cliente' },
+  { src: '/img/tarta-de-manzana.jpg', alt: 'Tarta de manzana entregada a un cliente' },
 ];
 
 const Gallery = () => {

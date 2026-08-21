@@ -6,31 +6,28 @@ import { QuantityButton } from '../QuantityButton';
 import { Reveal } from '../Reveal';
 import { SectionHeading } from '../SectionHeading';
 import type { Product } from '@/types/cart';
+import { productos as catalogProductos } from '@/data/products';
 
-// Ids en el rango 101+ para no colisionar con los productos del Catálogo (que usan 1-7)
-const productos: Product[] = [
-  {
-    id: 101,
-    name: 'Torta de chocolate',
-    description: 'Capas de bizcocho de chocolate húmedo y esponjoso...',
-    price: '30.00',
-    image: '/img/pexels-abhinavcoca-291528.jpg',
-  },
-  {
-    id: 102,
-    name: 'Torta de Nueces',
-    description: 'Bizcocho húmedo con nueces caramelizadas y un toque de canela.',
-    price: '1200',
-    image: '/img/pexels-valeriya-827516.jpg',
-  },
-  {
-    id: 103,
-    name: 'Torta Cremosa',
-    description: 'Bizcocho esponjoso cubierto con ganache cremoso y brillante.',
-    price: '1500',
-    image: '/img/pexels-eric-mufasa-578798-1414234.jpg',
-  },
-];
+// Destacamos 3 productos del catálogo acá, con una foto distinta a la que
+// usa el Catálogo (misma torta, otro ángulo) para no repetir la misma imagen
+// en las dos secciones. Ids en el rango 101+ para no colisionar con los
+// ids del Catálogo (que usan 1-5).
+const NEWS_PHOTOS: Record<number, string> = {
+  1: '/img/bizcochuelo-2.jpg',
+  2: '/img/bizcochuelo-chocolate-2.jpg',
+  3: '/img/budin-de-pan-2.jpg',
+};
+
+const productos: Product[] = Object.entries(NEWS_PHOTOS).map(([catalogId, image]) => {
+  const producto = catalogProductos.find((p) => p.id === Number(catalogId))!;
+  return {
+    id: producto.id + 100,
+    name: producto.name,
+    description: producto.description,
+    price: String(producto.price),
+    image,
+  };
+});
 
 type NewsProps = {
   addToCart: (producto: Product, cantidad: number) => void;

@@ -1,5 +1,6 @@
 "use client";
 import type { Product } from "@/types/cart";
+import { catalogTags as tags, productos } from "@/data/products";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -7,98 +8,6 @@ import { QuantityButton } from "../QuantityButton";
 import { Reveal } from "../Reveal";
 import { SectionHeading } from "../SectionHeading";
 import styles from "./Catalog.module.css";
-
-const productos = [
-  {
-    id: 1,
-    name: "Torta de Chocolate",
-    img: "/img/pexels-abhinavcoca-291528.jpg",
-    description:
-      "Capas de bizcocho de chocolate húmedo y esponjoso, rellenas con generoso dulce de leche cremoso. Cubierta con ganache de chocolate brillante y decorada con virutas de chocolate y un toque de nueces caramelizadas.",
-    tags: ["Torta", "Chocolate", "Dulce", "Leche", "Ganache", "Virutas"],
-    price: 1000,
-    sabores: [
-      "Chocolate clásico",
-      "Chocolate con dulce de leche",
-      "Chocolate con nueces",
-    ],
-  },
-  {
-    id: 2,
-    name: "Torta de Nueces",
-    img: "/img/pexels-valeriya-827516.jpg",
-    description: "Torta de nueces con bizcocho húmedo y nueces caramelizadas",
-    tags: ["Torta", "Nueces", "Caramelizadas", "Bizcocho", "Húmedo"],
-    price: 1200,
-    sabores: ["Nueces clásica", "Nueces con caramelo"],
-  },
-  {
-    id: 3,
-    name: "Cheesecake de Frutos del Bosque",
-    img: "/img/pexels-eric-mufasa-578798-1414234.jpg",
-    description:
-      "Bizcocho cremoso con coulis de frutos del bosque y un toque brillante de gelatina.",
-    tags: ["Torta", "Cremoso", "Brillante"],
-    price: 1500,
-    sabores: ["Frutos del bosque", "Frutilla", "Arándanos"],
-  },
-  {
-    id: 4,
-    name: "Torta Marmolada",
-    img: "/img/pexels-abhinavcoca-291528.jpg",
-    description:
-      "Bizcocho marmolado de chocolate y vainilla, húmedo por dentro y con ganache brillante.",
-    tags: ["Torta", "Chocolate", "Húmedo", "Brillante"],
-    price: 1100,
-    sabores: ["Chocolate y vainilla"],
-  },
-  {
-    id: 5,
-    name: "Torta de Dulce de Leche",
-    img: "/img/pexels-valeriya-827516.jpg",
-    description:
-      "Capas esponjosas rellenas de dulce de leche casero, dulce y suave en cada bocado.",
-    tags: ["Torta", "Dulce", "Leche", "Esponjoso"],
-    price: 1300,
-    sabores: ["Dulce de leche clásica", "Dulce de leche con nueces"],
-  },
-  {
-    id: 6,
-    name: "Torta de Nueces Caramelizadas",
-    img: "/img/pexels-eric-mufasa-578798-1414234.jpg",
-    description:
-      "Bizcocho húmedo cubierto con nueces caramelizadas y un baño de ganache brillante.",
-    tags: ["Torta", "Nueces", "Caramelizadas", "Húmedo", "Brillante"],
-    price: 1400,
-    sabores: ["Nueces caramelizadas"],
-  },
-  {
-    id: 7,
-    name: "Especial de la Casa",
-    img: "/img/pexels-abhinavcoca-291528.jpg",
-    description:
-      "Nuestra combinación preferida: bizcocho de chocolate, dulce de leche y virutas crocantes.",
-    tags: ["Torta", "Chocolate", "Dulce", "Leche", "Virutas"],
-    price: 1600,
-    sabores: ["Especial de la casa"],
-  },
-];
-
-const tags = [
-  "Torta",
-  "Chocolate",
-  "Dulce",
-  "Leche",
-  "Ganache",
-  "Virutas",
-  "Nueces",
-  "Caramelizadas",
-  "Bizcocho",
-  "Húmedo",
-  "Esponjoso",
-  "Cremoso",
-  "Brillante",
-];
 
 type CatalogProps = {
   addToCart: (producto: Product, cantidad: number, sabor?: string) => void;

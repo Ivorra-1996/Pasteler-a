@@ -16,7 +16,7 @@ const About = () => {
       <div className={styles.inner}>
         <Reveal className={styles.media}>
           <Image
-            src="/img/pexels-valeriya-827516.jpg"
+            src="/img/bizcochuelo-1.jpg"
             alt="Torta artesanal recién preparada en el taller de Dulce encanto"
             fill
             sizes="(max-width: 860px) 100vw, 50vw"
