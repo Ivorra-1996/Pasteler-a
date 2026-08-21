@@ -4,6 +4,7 @@ import { News } from '../News';
 import { About } from '../About';
 import { Process } from '../Process';
 import { Testimonials } from '../Testimonials';
+import { Gallery } from '../Gallery';
 import { PaymentMethods } from '../PaymentMethods';
 import { FAQ } from '../FAQ';
 import { Reveal } from '../Reveal';
@@ -27,6 +28,7 @@ const Initiation = () => {
       <About />
       <Process />
       <Testimonials />
+      <Gallery />
       <PaymentMethods />
       <FAQ />
     </div>

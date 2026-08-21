@@ -89,6 +89,14 @@
     transform: scaleX(1);
 }
 
+.nav a.active {
+    color: var(--color-accent-2);
+}
+
+.nav a.active::after {
+    transform: scaleX(1);
+}
+
 .nav .cta {
     background: var(--color-accent);
     color: var(--color-bg);
@@ -106,6 +114,42 @@
     color: var(--color-bg);
 }
 
+.nav .cta.active {
+    background: var(--color-accent-hover);
+    color: var(--color-bg);
+}
+
+.menuToggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--color-bg);
+    cursor: pointer;
+    padding: 4px;
+}
+
+.mobileMenu {
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.mobileMenu a {
+    display: block;
+    padding: 14px 28px;
+    color: var(--color-bg);
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: var(--text-base);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.mobileMenu a.active {
+    color: var(--color-accent-2);
+}
+
 @media (max-width: 768px) {
     .nav {
         font-size: var(--text-base);
@@ -117,10 +161,27 @@
     }
 }
 
-@media (max-width: 600px) {
-    .content {
-        justify-content: center;
-        text-align: center;
+/* Por debajo de este ancho el nav ya no entra en una sola fila: se
+   colapsa a un botón de menú, dejando visibles solo la marca, el CTA
+   de Catálogo y el carrito. */
+@media (max-width: 680px) {
+    .nav a:not(.cta) {
+        display: none;
+    }
+
+    .menuToggle {
+        display: flex;
+        align-items: center;
+    }
+
+    .mobileMenu {
+        display: flex;
+    }
+}
+
+@media (min-width: 681px) {
+    .mobileMenu {
+        display: none !important;
     }
 }
 

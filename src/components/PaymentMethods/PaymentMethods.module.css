@@ -30,11 +30,11 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: var(--color-text-muted);
+    color: var(--color-text-strong);
 }
 
 .item svg {
-    color: var(--color-accent-2);
+    color: var(--color-accent);
     flex-shrink: 0;
 }
 
